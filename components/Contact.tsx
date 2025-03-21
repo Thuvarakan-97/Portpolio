@@ -133,7 +133,7 @@ export default function Contact() {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 dark:bg-black/50 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-primary-foreground"
-                placeholder="+1 234 567 890"
+                placeholder="011 1234567"
               />
             </div>
             {/* Message Field */}

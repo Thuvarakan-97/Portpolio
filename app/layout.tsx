@@ -4,8 +4,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "next-themes";
 
-
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,17 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-      <ThemeProvider
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           <SiteHeader />
+          {children}
         </ThemeProvider>
-        {children}
         
         <Script
           id="tawk-to"
