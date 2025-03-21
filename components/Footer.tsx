@@ -5,13 +5,13 @@ import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail, ArrowUp, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
-  // const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   // Handle newsletter signup form submission
   const handleSubmit = async (e: FormEvent) => {
@@ -23,10 +23,10 @@ const Footer: React.FC = () => {
       return;
     }
 
-    // if (!recaptchaToken) {
-    //   setMessage("Please complete the CAPTCHA.");
-    //   return;
-    // }
+    if (!recaptchaToken) {
+      setMessage("Please complete the CAPTCHA.");
+      return;
+    }
 
     setIsSubmitting(true);
     setMessage("");
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify({ email, honeypot: "", recaptchaToken }),
+        body: JSON.stringify({ email, honeypot: "", recaptchaToken }),
       });
 
       const data = await response.json();
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
 
       setMessage("Thank you for subscribing!");
       setEmail("");
-      // setRecaptchaToken(null);
+      setRecaptchaToken(null);
     } catch (error: any) {
       setMessage(error.message || "An error occurred. Please try again.");
     } finally {
@@ -151,12 +151,12 @@ const Footer: React.FC = () => {
                   <span className="sr-only">Subscribe to newsletter</span>
                 </Button>
               </div>
-              {/* <div className="flex justify-center">
+              <div className="flex justify-center">
                 <ReCAPTCHA
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                   onChange={(token) => setRecaptchaToken(token)}
                 />
-              </div> */}
+              </div>
               {message && (
                 <p
                   className={`text-sm text-center animate-fade-in ${
