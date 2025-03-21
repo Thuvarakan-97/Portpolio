@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail, ArrowUp, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -151,12 +151,12 @@ const Footer: React.FC = () => {
                   <span className="sr-only">Subscribe to newsletter</span>
                 </Button>
               </div>
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
                 <ReCAPTCHA
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                   onChange={(token) => setRecaptchaToken(token)}
                 />
-              </div>
+              </div> */}
               {message && (
                 <p
                   className={`text-sm text-center animate-fade-in ${
