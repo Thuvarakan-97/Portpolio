@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  // const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   // Handle newsletter signup form submission
   const handleSubmit = async (e: FormEvent) => {
@@ -23,10 +23,10 @@ const Footer: React.FC = () => {
       return;
     }
 
-    if (!recaptchaToken) {
-      setMessage("Please complete the CAPTCHA.");
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   setMessage("Please complete the CAPTCHA.");
+    //   return;
+    // }
 
     setIsSubmitting(true);
     setMessage("");
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, honeypot: "", recaptchaToken }),
+        // body: JSON.stringify({ email, honeypot: "", recaptchaToken }),
       });
 
       const data = await response.json();
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
 
       setMessage("Thank you for subscribing!");
       setEmail("");
-      setRecaptchaToken(null);
+      // setRecaptchaToken(null);
     } catch (error: any) {
       setMessage(error.message || "An error occurred. Please try again.");
     } finally {
