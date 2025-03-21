@@ -185,7 +185,7 @@ const Footer: React.FC = () => {
             </h4>
             <div className="flex space-x-4">
               <a
-                href="https://github.com/thuvarakan"
+                href="https://github.com/Thuvarakan-97"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
@@ -194,7 +194,7 @@ const Footer: React.FC = () => {
                 <Github className="h-6 w-6" />
               </a>
               <a
-                href="https://linkedin.com/in/thuvarakan"
+                href="https://www.linkedin.com/in/thuvarakan-ponraj-3163bb1b2/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
@@ -203,7 +203,7 @@ const Footer: React.FC = () => {
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
-                href="https://twitter.com/thuvarakan"
+                href="https://x.com/thuvarakan1997"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter Profile"
@@ -212,7 +212,7 @@ const Footer: React.FC = () => {
                 <Twitter className="h-6 w-6" />
               </a>
               <a
-                href="mailto:thuvarakan@example.com"
+                href="mailto:p.thuvarakan1997@gmail.com"
                 aria-label="Email Me"
                 className="text-muted-foreground dark:text-gray-300 hover:text-primary dark:hover:text-primary-foreground transition-colors duration-300"
               >

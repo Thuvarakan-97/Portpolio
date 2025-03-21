@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -9,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Thuvarakan's Portfolio",
   description: "A portfolio showcasing Thuvarakan's projects and skills.",
+  icons: {
+    icon: "/favicon.ico", 
+  },
 };
 
 export default function RootLayout({

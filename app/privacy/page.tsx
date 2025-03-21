@@ -130,10 +130,10 @@ export default function PrivacyPage() {
               <li>
                 <strong>Request Deletion:</strong> You can request the deletion of your personal information, including chat data, by contacting us at{" "}
                 <a
-                  href="mailto:thuvarakan@example.com"
+                  href="mailto:p.thuvarakan1997@gmail.com"
                   className="text-primary hover:underline"
                 >
-                  thuvarakan@example.com
+                 p.thuvarakan1997@gmail.com
                 </a>
                 .
               </li>
@@ -165,10 +165,10 @@ export default function PrivacyPage() {
             <p className="mt-2">
               Email:{" "}
               <a
-                href="mailto:thuvarakan@example.com"
+                href="mailto:p.thuvarakan1997@gmail.com"
                 className="text-primary hover:underline"
               >
-                thuvarakan@example.com
+                p.thuvarakan1997@gmail.com
               </a>
             </p>
           </div>
