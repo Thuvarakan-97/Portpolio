@@ -1,10 +1,10 @@
 
 import './globals.css';
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SiteHeader } from "@/components/site-header";
-import Footer from '@/components/Footer';
+// import Footer from '@/components/Footer';
 import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] });
@@ -34,7 +34,7 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
             <main className="flex-1">{children}</main>
-            <Footer />
+            
           </div>
         </ThemeProvider>
 
