@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { MoonIcon, SunIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ThemeToggle } from "./theme-toggle"; 
+import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "About", href: "#about" },
@@ -15,11 +14,10 @@ const navigation = [
   { name: "Testimonials", href: "#testimonials" },
   { name: "Blog", href: "#blog" },
   { name: "Contact", href: "#contact" },
-]
+];
 
 export function SiteHeader() {
-  const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,7 +26,7 @@ export function SiteHeader() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <span className="font-bold">Ponraj Thuvarakan</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <nav className="flex items-center space-x-6 text-sm font-medium float-end">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -40,17 +38,8 @@ export function SiteHeader() {
             ))}
           </nav>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="ml-auto"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        >
-          <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        <ThemeToggle /> {/* Replace the Button with ThemeToggle */}
       </div>
     </header>
-  )
+  );
 }

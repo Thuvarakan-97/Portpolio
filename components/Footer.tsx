@@ -1,4 +1,4 @@
-// components/Footer.tsx
+"use client";
 
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
@@ -32,21 +32,29 @@ const Footer: React.FC = () => {
     setMessage("");
 
     try {
-      const response = await fetch("/api/newsletter", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({ email, honeypot: "", recaptchaToken }),
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY, // Add your Web3Forms access key
+          email,
+          honeypot: "", 
+          "g-recaptcha-response": recaptchaToken, 
+          subject: "Newsletter Subscription",
+          from_name: "Thuvarakan Website",
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || !data.success) {
         throw new Error(data.message || "Failed to subscribe");
       }
 
-      setMessage("Thank you for subscribing!");
+      setMessage("Thank you for subscribing! We will continue with newsletters.");
       setEmail("");
       setRecaptchaToken(null);
     } catch (error: any) {
@@ -160,7 +168,9 @@ const Footer: React.FC = () => {
               {message && (
                 <p
                   className={`text-sm text-center animate-fade-in ${
-                    message.includes("error") || message.includes("valid") || message.includes("CAPTCHA")
+                    message.includes("error") ||
+                    message.includes("valid") ||
+                    message.includes("CAPTCHA")
                       ? "text-destructive"
                       : "text-primary"
                   }`}

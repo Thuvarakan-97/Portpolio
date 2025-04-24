@@ -1,10 +1,13 @@
-import { Inter } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider } from "next-themes";
 
-const inter = Inter({ subsets: ["latin"] });
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
+import { SiteHeader } from "@/components/site-header";
+import Footer from '@/components/Footer';
+import Script from "next/script";
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: "Thuvarakan's Portfolio",
@@ -28,10 +31,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
-        
+
         <Script
           id="tawk-to"
           strategy="lazyOnload"
