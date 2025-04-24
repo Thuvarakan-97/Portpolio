@@ -22,11 +22,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+        <div className="flex items-center w-full">
+          <Link href="/" className="flex items-center space-x-2">
             <span className="font-bold">Ponraj Thuvarakan</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium float-end">
+          <nav className="ml-auto flex items-center space-x-6 text-sm font-medium">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -37,8 +37,10 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
+          <div className="ml-8 mx-4">
+            <ThemeToggle />
+          </div>
         </div>
-        <ThemeToggle /> {/* Replace the Button with ThemeToggle */}
       </div>
     </header>
   );
