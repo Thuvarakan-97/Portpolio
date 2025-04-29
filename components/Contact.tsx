@@ -118,7 +118,7 @@ export default function Contact() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 dark:bg-black/50 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-primary-foreground"
                 required
-                placeholder="your.email@example.com"
+                placeholder="your E-Mail here"
               />
             </div>
             {/* Phone Number Field (Optional) */}
