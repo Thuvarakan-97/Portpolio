@@ -75,7 +75,13 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className={`flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-all duration-300 group bg-gradient-to-r from-primary to-accent">
+              <Link href="/project-request">
+                <Sparkles className="mr-2 h-5 w-5 group-hover:rotate-180 transition-transform" />
+                Start a Project
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="shadow-lg hover:shadow-xl transition-all duration-300 group border-2">
               <Link href="#contact">
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Contact Me

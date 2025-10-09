@@ -237,6 +237,7 @@ const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-center">
               {[
+                { name: "Start a Project", href: "/project-request" },
                 { name: "Download CV", href: "/thuvarakan.pdf" },
                 { name: "Privacy Policy", href: "/privacy" },
                 { name: "Testimonials", href: "#testimonials" },

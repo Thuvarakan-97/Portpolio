@@ -113,6 +113,11 @@ export function SiteHeader() {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center space-x-4">
           <ThemeToggle />
+          <Button asChild size="sm" variant="outline" className="border-2 shadow-md hover:shadow-lg transition-all duration-300">
+            <Link href="/project-request">
+              Start Project
+            </Link>
+          </Button>
           <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all duration-300">
             <Link href="#contact">
               Get in Touch
@@ -162,8 +167,13 @@ export function SiteHeader() {
                   </Link>
                 ))}
               </nav>
-              <div className="mt-8">
+              <div className="mt-8 space-y-3">
                 <Button asChild className="w-full" size="lg">
+                  <Link href="/project-request">
+                    Start a Project
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full border-2" size="lg">
                   <Link 
                     href="#contact"
                     onClick={(e) => {
