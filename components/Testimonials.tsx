@@ -21,6 +21,7 @@ export default function Testimonials() {
               <div>
                 <p className="font-semibold">{testimonial.name}</p>
                 <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                <p className="text-sm italic text-primary">{testimonial.company}</p>
               </div>
               <Image
                 src={testimonial.image}

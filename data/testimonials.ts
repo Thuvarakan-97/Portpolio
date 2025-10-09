@@ -2,6 +2,7 @@ export const testimonials = [
     {
       name: "Miththilan",
       role: "Senior Software Engineer",
+      company: "Informatics International",
       content:
         "Thuvarakan's work was integral to the success of our project. His attention to detail and ability to deliver high-quality solutions exceeded our expectations.",
       image: "/images/mithi.jpeg",
@@ -9,6 +10,7 @@ export const testimonials = [
     {
       name: "Kowreesan",
       role: "Software Engineer",
+       company: "Apptimus Tech",
       content:
         "Working with Thuvarakan was a pleasure. He has a knack for solving complex problems and always approaches challenges with a positive attitude and dedication.",
       image: "/images/kowri.jpeg",
@@ -16,6 +18,7 @@ export const testimonials = [
     {
       name: "Janusan",
       role: "IOT Developer",
+       company: "SPM Tech",
       content:
         "Thuvarakan developed an efficient portal for us that improved our processes significantly. His ability to integrate various aspects of the system seamlessly was impressive.",
       image: "/images/janu.jpeg",
