@@ -1,9 +1,12 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { blogsAndPublications } from "@/data/blogs";
+import { useLanguage } from "@/lib/language";
 
 
 const MediumIcon = () => (
@@ -20,28 +23,29 @@ const MediumIcon = () => (
 );
 
 export default function BlogAndPublications() {
+  const { t } = useLanguage();
   return (
     <section id="blog" className="py-16 bg-muted/50">
       <div className="container px-4 md:px-6">
       <h2 className="text-4xl font-bold text-center mb-12 relative text-foreground dark:text-white">
           <BookOpen className="inline-block mr-2 h-8 w-8 text-primary" />
-          Blogs & Publications
+          {t("Blogs & Publications")}
           <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary to-transparent" />
         </h2>
         
         <Tabs defaultValue="publications" className="w-full">
-          <TabsList className="grid grid-cols-2 w-[300px] mx-auto mb-8 bg-primary/10 rounded-full p-1 shadow-sm">
+          <TabsList className="mx-auto mb-8 grid w-full max-w-[300px] grid-cols-2 rounded-full bg-primary/10 p-1 shadow-sm">
             <TabsTrigger
               value="blogs"
               className="rounded-full text-sm font-medium transition-all duration-200 data-[state=active]:bg-primary data-[state=active]:text-white hover:bg-primary/20"
             >
-              Blogs
+              {t("Blog")}
             </TabsTrigger>
             <TabsTrigger
               value="publications"
               className="rounded-full text-sm font-medium transition-all duration-200 data-[state=active]:bg-primary data-[state=active]:text-white hover:bg-primary/20"
             >
-              Publications
+              {t("Publications")}
             </TabsTrigger>
           </TabsList>
 
@@ -54,23 +58,23 @@ export default function BlogAndPublications() {
                   .map((blog) => (
                     <Card
                       key={blog.title}
-                      className="flex-none w-80 p-6 bg-gradient-to-br from-primary/5 to-background border border-primary/10 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                      className="flex-none w-[min(80vw,20rem)] p-5 sm:p-6 bg-gradient-to-br from-primary/5 to-background border border-primary/10 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
                     >
                       <span className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent" />
                       <span className="absolute top-4 right-4 bg-primary text-white text-xs px-2 py-1 rounded-full shadow-sm flex items-center space-x-1">
                         <MediumIcon />
                         <span>Medium</span>
                       </span>
-                      <h3 className="text-xl font-semibold mb-2 text-justify mt-5">{blog.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{blog.date}</p>
-                      <p className="text-muted-foreground mb-4 text-justify line-clamp-3">{blog.description}</p>
+                      <h3 className="text-xl font-semibold mb-2 text-center mt-5">{t(blog.title.trim())}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{t(blog.date)}</p>
+                      <p className="text-muted-foreground mb-4 text-center line-clamp-3">{t(blog.description)}</p>
                       <Button
                         asChild
                         variant="link"
                         className="p-0 h-auto text-primary hover:underline transition-colors duration-200"
                       >
                         <Link href={blog.link} target="_blank">
-                          Read More →
+                          {t("Read More →")}
                         </Link>
                       </Button>
                     </Card>
@@ -87,20 +91,24 @@ export default function BlogAndPublications() {
                 .map((publication) => (
                   <Card
                     key={publication.title}
-                    className="p-6 bg-gradient-to-br from-primary/5 to-background border border-primary/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
+                    className="p-5 sm:p-6 bg-gradient-to-br from-primary/5 to-background border border-primary/20 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
                   >
                     <span className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent" />
                     <span className="absolute top-4 right-4 bg-primary text-white text-xs px-2 py-1 rounded-full shadow-sm">
-                      Featured
+                      {t("Featured")}
                     </span>
-                    <h3 className="text-xl font-semibold mb-2 text-justify mt-5">{publication.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-2">{publication.date}</p>
+                    <h3 className="text-xl font-semibold mb-2 text-center mt-5">{t(publication.title)}</h3>
+                    <p className="text-sm text-muted-foreground mb-2">{t(publication.date)}</p>
                     <div className="max-h-48 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-muted/20">
-                      <p className="text-muted-foreground mb-4 text-justify">{publication.description}</p>
+                      <p className="text-muted-foreground mb-4 text-center">{t(publication.description)}</p>
                       <div className="text-sm text-muted-foreground space-y-2">
-                        <p><strong>Publisher:</strong> {publication.publisher}</p>
-                        <p><strong>Location:</strong> {publication.location}</p>
-                        <p><strong>Conference:</strong> {publication.conference}</p>
+                        <p><strong>{t("Publisher")}:</strong> {publication.publisher}</p>
+                        {publication.location && (
+                          <p><strong>{t("Location")}:</strong> {t(publication.location)}</p>
+                        )}
+                        {publication.conference && (
+                          <p><strong>{t("Conference")}:</strong> {t(publication.conference)}</p>
+                        )}
                         <p><strong>DOI:</strong> {publication.doi}</p>
                       </div>
                     </div>
@@ -110,7 +118,7 @@ export default function BlogAndPublications() {
                       className="mt-4 p-0 h-auto text-primary hover:underline transition-colors duration-200"
                     >
                       <Link href={publication.link} target="_blank">
-                        View Publication →
+                        {t("View Publication →")}
                       </Link>
                     </Button>
                   </Card>

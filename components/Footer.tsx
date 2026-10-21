@@ -5,8 +5,10 @@ import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail, ArrowUp, Send, CheckCircle2, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/language";
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -81,12 +83,12 @@ const Footer: React.FC = () => {
                 <div className="inline-flex items-center gap-2 mb-3">
                   <Sparkles className="w-6 h-6 text-primary animate-pulse" />
                   <h3 className="text-2xl md:text-3xl font-bold">
-                    <span className="gradient-text">Stay Updated!</span>
+                    <span className="gradient-text">{t("Stay Updated!")}</span>
                   </h3>
                   <Sparkles className="w-6 h-6 text-accent animate-pulse" />
                 </div>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Subscribe to my newsletter for the latest updates on web development, tutorials, and tech insights.
+                  {t("Subscribe to my newsletter for the latest updates on web development, tutorials, and tech insights.")}
                 </p>
               </div>
 
@@ -117,8 +119,8 @@ const Footer: React.FC = () => {
                     }}
                     required
                     disabled={isSubmitting}
-                    className="pl-12 pr-4 py-6 text-base border-2 border-border rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 disabled:opacity-50"
-                    aria-label="Email address for newsletter"
+                    className="pl-12 pr-4 py-6 text-center text-base border-2 border-border rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 disabled:opacity-50"
+                    aria-label={t("Email address for newsletter")}
                   />
                 </div>
 
@@ -151,11 +153,11 @@ const Footer: React.FC = () => {
                           d="M4 12a8 8 0 018-8v8H4z"
                         />
                       </svg>
-                      Subscribing...
+                      {t("Subscribing...")}
                     </span>
                   ) : (
                     <span className="flex items-center justify-center gap-2">
-                      Subscribe to Newsletter
+                      {t("Subscribe to Newsletter")}
                       <Send className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
                   )}
@@ -164,7 +166,7 @@ const Footer: React.FC = () => {
                 {/* Status Message */}
                 {message && (
                   <div
-                    className={`flex items-center gap-3 p-4 rounded-xl animate-fade-in ${
+                    className={`flex items-center justify-center gap-3 p-4 rounded-xl text-center animate-fade-in ${
                       message.type === "success"
                         ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
                         : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
@@ -173,17 +175,17 @@ const Footer: React.FC = () => {
                     {message.type === "success" && (
                       <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
                     )}
-                    <span className="text-sm font-medium">{message.text}</span>
+                    <span className="text-sm font-medium">{t(message.text)}</span>
                   </div>
                 )}
 
                 {/* Privacy Notice */}
                 <p className="text-xs text-center text-muted-foreground">
-                  By subscribing, you agree to our{" "}
+                  {t("By subscribing, you agree to our")}{" "}
                   <Link href="/privacy" className="underline hover:text-primary transition-colors">
-                    Privacy Policy
+                    {t("Privacy Policy")}
                   </Link>
-                  . Unsubscribe anytime.
+                  . {t("Unsubscribe anytime.")}
                 </p>
               </form>
             </div>
@@ -191,24 +193,24 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-center">
           {/* Branding Section */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex flex-col items-center text-center">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-6 h-6 text-primary" />
               <h3 className="text-2xl font-bold gradient-text">
                 Thuvarakan
               </h3>
             </div>
-            <p className="text-muted-foreground text-center md:text-left leading-relaxed">
-              Building innovative solutions with passion and creativity. Let's create something amazing together.
+            <p className="text-muted-foreground text-center leading-relaxed">
+              {t("Building innovative solutions with passion and creativity. Let's create something amazing together.")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-col items-center">
             <h4 className="text-lg font-semibold mb-4 gradient-text">
-              Quick Links
+              {t("Quick Links")}
             </h4>
             <ul className="space-y-2 text-center">
               {[
@@ -223,7 +225,7 @@ const Footer: React.FC = () => {
                     href={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 inline-block hover:translate-x-1 transform"
                   >
-                    {link.name}
+                    {t(link.name)}
                   </Link>
                 </li>
               ))}
@@ -233,7 +235,7 @@ const Footer: React.FC = () => {
           {/* Resources */}
           <div className="flex flex-col items-center">
             <h4 className="text-lg font-semibold mb-4 gradient-text">
-              Resources
+              {t("Resources")}
             </h4>
             <ul className="space-y-2 text-center">
               {[
@@ -248,7 +250,7 @@ const Footer: React.FC = () => {
                     target={link.href.startsWith("http") || link.href.endsWith(".pdf") ? "_blank" : undefined}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 inline-block hover:translate-x-1 transform"
                   >
-                    {link.name}
+                    {t(link.name)}
                   </Link>
                 </li>
               ))}
@@ -256,9 +258,9 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Social Media Links */}
-          <div className="flex flex-col items-center md:items-end">
+          <div className="flex flex-col items-center">
             <h4 className="text-lg font-semibold mb-4 gradient-text">
-              Connect With Me
+              {t("Connect With Me")}
             </h4>
             <div className="flex gap-4">
               {[
@@ -287,20 +289,20 @@ const Footer: React.FC = () => {
         <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 text-center">
           {/* Copyright */}
-          <div className="text-center md:text-left text-muted-foreground text-sm">
-            <p>© {new Date().getFullYear()} Thuvarakan. All rights reserved.</p>
+          <div className="text-center text-muted-foreground text-sm">
+            <p>© {new Date().getFullYear()} Thuvarakan. {t("All rights reserved.")}</p>
           </div>
 
           {/* Back to Top Button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="group flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:border-primary bg-background hover:bg-primary/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
-            aria-label="Scroll to top"
+            aria-label={t("Scroll to top")}
           >
             <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
-              Back to Top
+              {t("Back to Top")}
             </span>
             <ArrowUp className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-1 transition-all" />
           </button>

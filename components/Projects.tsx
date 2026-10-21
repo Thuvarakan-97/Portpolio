@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import { projects } from "@/data/projects";
 import { useState, useEffect, useRef } from "react";
 import { ExternalLink, Calendar, Sparkles } from "lucide-react";
+import { useLanguage } from "@/lib/language";
 
 export default function Projects() {
+  const { t } = useLanguage();
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -60,11 +62,11 @@ export default function Projects() {
         {/* Section Title */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">My Projects</span>
+            <span className="gradient-text">{t("My Projects")}</span>
           </h2>
           <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></div>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my recent work and creative endeavors
+            {t("A showcase of my recent work and creative endeavors")}
           </p>
         </div>
 
@@ -78,7 +80,7 @@ export default function Projects() {
                 : "bg-card border-2 border-border hover:border-primary/50 hover:scale-105"
             }`}
           >
-            All Projects
+            {t("All Projects")}
           </button>
           {allTechnologies.slice(0, 5).map((tech) => (
             <button
@@ -96,11 +98,11 @@ export default function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project, index) => (
             <Card
               key={project.name}
-              className={`group relative overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 card-hover ${
+              className={`group relative w-full max-w-md overflow-hidden border-2 text-center hover:border-primary/50 transition-all duration-500 card-hover ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${index * 100 + 400}ms` }}
@@ -115,16 +117,19 @@ export default function Projects() {
               <div className="relative w-full h-56 overflow-hidden">
                 {isMounted ? (
                   <>
-                    <Image
-                      src={project.image}
-                      alt={project.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      onError={(e) => {
-                        e.currentTarget.src = "/images/fallback.jpg";
-                      }}
-                    />
+                    <div className={`grid h-full ${project.images.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+                      {project.images.map((image) => (
+                        <div key={image} className="relative min-w-0 overflow-hidden">
+                          <Image
+                            src={image}
+                            alt={t(project.name)}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        </div>
+                      ))}
+                    </div>
                     {/* Image Overlay on Hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                       <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -141,22 +146,22 @@ export default function Projects() {
               <div className="p-6 relative z-10">
                 {/* Project Title */}
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                  {project.name}
+                  {t(project.name)}
                 </h3>
 
                 {/* Project Period */}
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-3">
                   <Calendar className="w-4 h-4" />
-                  <span>{project.period}</span>
+                  <span>{t(project.period)}</span>
                 </div>
 
                 {/* Project Description */}
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
-                  {project.description}
+                <p className="text-center text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+                  {t(project.description)}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap justify-center gap-2 mb-4">
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
@@ -173,15 +178,17 @@ export default function Projects() {
                 </div>
 
                 {/* View Project Button */}
-                <Button
-                  asChild
-                  className="w-full group/btn shadow-md hover:shadow-xl transition-all duration-300"
-                >
-                  <Link href={project.link} target="_blank" rel="noopener noreferrer">
-                    <span>View Project</span>
-                    <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
+                {project.link && (
+                  <Button
+                    asChild
+                    className="w-full group/btn shadow-md hover:shadow-xl transition-all duration-300"
+                  >
+                    <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                      <span>{t("View Project")}</span>
+                      <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                )}
               </div>
 
               {/* Decorative Sparkle */}
@@ -196,7 +203,7 @@ export default function Projects() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-16">
             <p className="text-muted-foreground text-lg">
-              No projects found with this filter.
+              {t("No projects found with this filter.")}
             </p>
           </div>
         )}

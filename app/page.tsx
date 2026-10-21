@@ -12,7 +12,7 @@ import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-center">
 
       {/* Hero Section */}
       <section id="hero">

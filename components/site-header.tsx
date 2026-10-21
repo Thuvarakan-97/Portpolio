@@ -6,6 +6,8 @@ import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/lib/language";
+import { LanguageSelector } from "@/components/language-selector";
 import {
   Sheet,
   SheetContent,
@@ -16,17 +18,18 @@ import {
 } from "@/components/ui/sheet";
 
 const navigation = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Education", href: "#education" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact", href: "#contact" },
+  { key: "About", href: "#about" },
+  { key: "Projects", href: "#projects" },
+  { key: "Experience", href: "#experience" },
+  { key: "Education", href: "#education" },
+  { key: "Testimonials", href: "#testimonials" },
+  { key: "Blog", href: "#blog" },
+  { key: "Contact", href: "#contact" },
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -70,7 +73,7 @@ export function SiteHeader() {
           : 'bg-background/60 backdrop-blur-sm'
       }`}
     >
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container flex h-16 items-center justify-between gap-2 px-3 sm:px-4 md:px-6">
         {/* Logo */}
         <Link 
           href="/" 
@@ -102,7 +105,7 @@ export function SiteHeader() {
                   : 'text-muted-foreground'
               }`}
             >
-              {item.name}
+              {t(item.key)}
               {activeSection === item.href && (
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-primary rounded-full"></span>
               )}
@@ -112,36 +115,38 @@ export function SiteHeader() {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center space-x-4">
+          <LanguageSelector />
           <ThemeToggle />
           <Button asChild size="sm" variant="outline" className="border-2 shadow-md hover:shadow-lg transition-all duration-300">
             <Link href="/project-request">
-              Start Project
+              {t("Start Project")}
             </Link>
           </Button>
           <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all duration-300">
             <Link href="#contact">
-              Get in Touch
+              {t("Get in Touch")}
             </Link>
           </Button>
         </div>
 
         {/* Mobile Menu */}
-        <div className="flex items-center space-x-2 md:hidden">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2 md:hidden">
+          <LanguageSelector />
           <ThemeToggle />
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
+                <span className="sr-only">{t("Toggle menu")}</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <SheetContent side="right" className="w-[min(88vw,400px)]">
               <SheetHeader>
-                <SheetTitle className="text-left">
-                  <span className="gradient-text">Navigation</span>
+                <SheetTitle className="text-center">
+                  <span className="gradient-text">{t("Navigation")}</span>
                 </SheetTitle>
-                <SheetDescription className="text-left">
-                  Explore my portfolio sections
+                <SheetDescription className="text-center">
+                  {t("Explore my portfolio sections")}
                 </SheetDescription>
               </SheetHeader>
               <nav className="flex flex-col space-y-1 mt-6">
@@ -153,16 +158,16 @@ export function SiteHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`group flex items-center px-4 py-3 rounded-lg transition-all duration-300 ${
+                    className={`group relative flex items-center justify-center px-4 py-3 rounded-lg text-center transition-all duration-300 ${
                       activeSection === item.href
                         ? 'bg-primary text-primary-foreground'
                         : 'hover:bg-muted'
                     }`}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <span className="text-base font-medium">{item.name}</span>
+                    <span className="text-base font-medium">{t(item.key)}</span>
                     {activeSection === item.href && (
-                      <Sparkles className="ml-auto h-4 w-4 animate-pulse" />
+                      <Sparkles className="absolute right-4 h-4 w-4 animate-pulse" />
                     )}
                   </Link>
                 ))}
@@ -170,7 +175,7 @@ export function SiteHeader() {
               <div className="mt-8 space-y-3">
                 <Button asChild className="w-full" size="lg">
                   <Link href="/project-request">
-                    Start a Project
+                    {t("Start a Project")}
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="w-full border-2" size="lg">
@@ -181,7 +186,7 @@ export function SiteHeader() {
                       handleNavClick('#contact');
                     }}
                   >
-                    Get in Touch
+                    {t("Get in Touch")}
                   </Link>
                 </Button>
               </div>

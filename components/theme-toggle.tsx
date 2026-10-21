@@ -4,8 +4,10 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/language";
 
 export function ThemeToggle() {
+  const { t } = useLanguage();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -23,7 +25,7 @@ export function ThemeToggle() {
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="w-9 h-9 transition-all duration-300 hover:bg-secondary"
-      aria-label="Toggle theme"
+      aria-label={t("Toggle theme")}
     >
       {theme === "dark" ? (
         <Sun className="h-5 w-5 transition-all" />

@@ -28,8 +28,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { useLanguage } from "@/lib/language";
 
 export default function ProjectRequest() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -239,7 +241,7 @@ Submitted via Project Request Form
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-center">
       {/* Hero Section */}
       <section 
         ref={sectionRef}
@@ -255,13 +257,12 @@ Submitted via Project Request Form
             <div className="inline-flex items-center gap-2 mb-4">
               <Sparkles className="w-8 h-8 text-primary animate-pulse" />
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                <span className="gradient-text">Start Your Project</span>
+                <span className="gradient-text">{t("Start Your Project")}</span>
               </h1>
               <Sparkles className="w-8 h-8 text-accent animate-pulse" />
             </div>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mt-4">
-              Let's bring your ideas to life! Fill out the form below and I'll get back to you within 12-24 hours 
-              with a detailed proposal and timeline.
+              {t("Let's bring your ideas to life! Fill out the form below and I'll get back to you within 12-24 hours with a detailed proposal and timeline.")}
             </p>
           </div>
 
@@ -275,12 +276,12 @@ Submitted via Project Request Form
               }`}
             >
               {formStatus.type === "success" && <CheckCircle2 className="w-6 h-6 flex-shrink-0" />}
-              <span className="font-medium">{formStatus.message}</span>
+              <span className="font-medium">{t(formStatus.message)}</span>
             </div>
           )}
 
           {/* Main Form Card */}
-          <Card className={`max-w-4xl mx-auto p-8 md:p-10 border-2 hover:border-primary/50 transition-all duration-1000 ${
+          <Card className={`max-w-4xl mx-auto p-5 sm:p-8 md:p-10 border-2 text-center hover:border-primary/50 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`} style={{ transitionDelay: '200ms' }}>
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
@@ -288,17 +289,17 @@ Submitted via Project Request Form
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Contact Information Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center justify-center gap-2 mb-4">
                   <User className="w-5 h-5 text-primary" />
-                  <h2 className="text-2xl font-bold gradient-text">Contact Information</h2>
+                  <h2 className="text-2xl font-bold gradient-text">{t("Contact Information")}</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="name" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <User className="w-4 h-4 text-primary" />
-                      <span>Full Name *</span>
+                      <span>{t("Full Name *")}</span>
                     </label>
                     <Input
                       id="name"
@@ -306,19 +307,19 @@ Submitted via Project Request Form
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`border-2 rounded-xl bg-background/50 focus:ring-2 focus:ring-primary/50 ${
+                      className={`border-2 rounded-xl bg-background/50 text-center focus:ring-2 focus:ring-primary/50 ${
                         errors.name ? 'border-red-500' : 'border-border'
                       }`}
-                      placeholder="Enter Your Name"
+                      placeholder={t("Enter Your Name")}
                     />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-center text-red-500 text-xs mt-1">{t(errors.name)}</p>}
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="email" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <Mail className="w-4 h-4 text-primary" />
-                      <span>Email Address *</span>
+                      <span>{t("Email Address *")}</span>
                     </label>
                     <Input
                       id="email"
@@ -326,19 +327,19 @@ Submitted via Project Request Form
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`border-2 rounded-xl bg-background/50 focus:ring-2 focus:ring-primary/50 ${
+                      className={`border-2 rounded-xl bg-background/50 text-center focus:ring-2 focus:ring-primary/50 ${
                         errors.email ? 'border-red-500' : 'border-border'
                       }`}
-                      placeholder="Enter your email"
+                      placeholder={t("Enter your email")}
                     />
-                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                    {errors.email && <p className="text-center text-red-500 text-xs mt-1">{t(errors.email)}</p>}
                   </div>
 
                   {/* Phone */}
                   <div>
-                    <label htmlFor="phone" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="phone" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <Phone className="w-4 h-4 text-primary" />
-                      <span>Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></span>
+                      <span>{t("Phone Number")} <span className="text-muted-foreground font-normal">({t("Optional")})</span></span>
                     </label>
                     <Input
                       id="phone"
@@ -346,16 +347,16 @@ Submitted via Project Request Form
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="border-2 border-border rounded-xl bg-background/50 focus:ring-2 focus:ring-primary/50"
-                      placeholder="Enter your phone number"
+                      className="border-2 border-border rounded-xl bg-background/50 text-center focus:ring-2 focus:ring-primary/50"
+                      placeholder={t("Enter your phone number")}
                     />
                   </div>
 
                   {/* Company */}
                   <div>
-                    <label htmlFor="company" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="company" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <Building2 className="w-4 h-4 text-primary" />
-                      <span>Company/Organization <span className="text-muted-foreground font-normal">(Optional)</span></span>
+                      <span>{t("Company/Organization")} <span className="text-muted-foreground font-normal">({t("Optional")})</span></span>
                     </label>
                     <Input
                       id="company"
@@ -363,16 +364,16 @@ Submitted via Project Request Form
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="border-2 border-border rounded-xl bg-background/50 focus:ring-2 focus:ring-primary/50"
-                      placeholder="Enter Your Company Name"
+                      className="border-2 border-border rounded-xl bg-background/50 text-center focus:ring-2 focus:ring-primary/50"
+                      placeholder={t("Enter Your Company Name")}
                     />
                   </div>
 
                   {/* Website */}
                   <div className="md:col-span-2">
-                    <label htmlFor="website" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="website" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <LinkIcon className="w-4 h-4 text-primary" />
-                      <span>Website <span className="text-muted-foreground font-normal">(Optional)</span></span>
+                      <span>{t("Website")} <span className="text-muted-foreground font-normal">({t("Optional")})</span></span>
                     </label>
                     <Input
                       id="website"
@@ -380,7 +381,7 @@ Submitted via Project Request Form
                       name="website"
                       value={formData.website}
                       onChange={handleChange}
-                      className="border-2 border-border rounded-xl bg-background/50 focus:ring-2 focus:ring-primary/50"
+                      className="border-2 border-border rounded-xl bg-background/50 text-center focus:ring-2 focus:ring-primary/50"
                       placeholder="https://yourwebsite.com"
                     />
                   </div>
@@ -392,123 +393,123 @@ Submitted via Project Request Form
 
               {/* Project Details Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center justify-center gap-2 mb-4">
                   <Briefcase className="w-5 h-5 text-primary" />
-                  <h2 className="text-2xl font-bold gradient-text">Project Details</h2>
+                  <h2 className="text-2xl font-bold gradient-text">{t("Project Details")}</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Project Type */}
                   <div>
-                    <label htmlFor="projectType" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="projectType" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <Target className="w-4 h-4 text-primary" />
-                      <span>Project Type *</span>
+                      <span>{t("Project Type *")}</span>
                     </label>
                     <Select value={formData.projectType} onValueChange={(value) => handleSelectChange("projectType", value)}>
                       <SelectTrigger className={`border-2 rounded-xl ${errors.projectType ? 'border-red-500' : 'border-border'}`}>
-                        <SelectValue placeholder="Select type" />
+                        <SelectValue placeholder={t("Select type")} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="web-development">Web Development</SelectItem>
-                        <SelectItem value="mobile-app">Mobile App</SelectItem>
-                        <SelectItem value="full-stack">Full Stack Application</SelectItem>
-                        <SelectItem value="ecommerce">E-commerce</SelectItem>
-                        <SelectItem value="portfolio">Portfolio Website</SelectItem>
-                        <SelectItem value="landing-page">Landing Page</SelectItem>
-                        <SelectItem value="web-app">Web Application</SelectItem>
-                        <SelectItem value="api-integration">API Integration</SelectItem>
-                        <SelectItem value="maintenance">Website Maintenance</SelectItem>
-                        <SelectItem value="consulting">Consulting</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="web-development">{t("Web Development")}</SelectItem>
+                        <SelectItem value="mobile-app">{t("Mobile App")}</SelectItem>
+                        <SelectItem value="full-stack">{t("Full Stack Application")}</SelectItem>
+                        <SelectItem value="ecommerce">{t("E-commerce")}</SelectItem>
+                        <SelectItem value="portfolio">{t("Portfolio Website")}</SelectItem>
+                        <SelectItem value="landing-page">{t("Landing Page")}</SelectItem>
+                        <SelectItem value="web-app">{t("Web Application")}</SelectItem>
+                        <SelectItem value="api-integration">{t("API Integration")}</SelectItem>
+                        <SelectItem value="maintenance">{t("Website Maintenance")}</SelectItem>
+                        <SelectItem value="consulting">{t("Consulting")}</SelectItem>
+                        <SelectItem value="other">{t("Other")}</SelectItem>
                       </SelectContent>
                     </Select>
-                    {errors.projectType && <p className="text-red-500 text-xs mt-1">{errors.projectType}</p>}
+                    {errors.projectType && <p className="text-center text-red-500 text-xs mt-1">{t(errors.projectType)}</p>}
                   </div>
 
                    {/* Budget */}
                   <div>
-                    <label htmlFor="budget" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="budget" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <DollarSign className="w-4 h-4 text-primary" />
-                      <span>Budget Range *</span>
+                      <span>{t("Budget Range *")}</span>
                     </label>
                     <Select value={formData.budget} onValueChange={(value) => handleSelectChange("budget", value)}>
                       <SelectTrigger className={`border-2 rounded-xl ${errors.budget ? 'border-red-500' : 'border-border'}`}>
-                        <SelectValue placeholder="Select range" />
+                        <SelectValue placeholder={t("Select range")} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="under-100">Under $100</SelectItem>
-                        <SelectItem value="100-200">$100 - $200</SelectItem>
-                        <SelectItem value="200-500">$200 - $500</SelectItem>
-                        <SelectItem value="500-1000">$500 - $1,000</SelectItem>
-                        <SelectItem value="1000-2000">$1,000 - $2,000</SelectItem>
-                        <SelectItem value="above-2000">Above $2,000</SelectItem>
+                        <SelectItem value="under-100">{t("Under $100")}</SelectItem>
+                        <SelectItem value="100-200">{t("$100 - $200")}</SelectItem>
+                        <SelectItem value="200-500">{t("$200 - $500")}</SelectItem>
+                        <SelectItem value="500-1000">{t("$500 - $1,000")}</SelectItem>
+                        <SelectItem value="1000-2000">{t("$1,000 - $2,000")}</SelectItem>
+                        <SelectItem value="above-2000">{t("Above $2,000")}</SelectItem>
                       </SelectContent>
                     </Select>
-                    {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget}</p>}
+                    {errors.budget && <p className="text-center text-red-500 text-xs mt-1">{t(errors.budget)}</p>}
                   </div>
 
                   {/* Timeline */}
                   <div>
-                    <label htmlFor="timeline" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                    <label htmlFor="timeline" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                       <Clock className="w-4 h-4 text-primary" />
-                      <span>Timeline *</span>
+                      <span>{t("Timeline *")}</span>
                     </label>
                     <Select value={formData.timeline} onValueChange={(value) => handleSelectChange("timeline", value)}>
                       <SelectTrigger className={`border-2 rounded-xl ${errors.timeline ? 'border-red-500' : 'border-border'}`}>
-                        <SelectValue placeholder="Select timeline" />
+                        <SelectValue placeholder={t("Select timeline")} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="asap">ASAP (1-2 weeks)</SelectItem>
-                        <SelectItem value="1-month">1 Month</SelectItem>
-                        <SelectItem value="2-3-months">2-3 Months</SelectItem>
-                        <SelectItem value="3-6-months">3-6 Months</SelectItem>
-                        <SelectItem value="6-plus-months">6+ Months</SelectItem>
-                        <SelectItem value="flexible">Flexible</SelectItem>
+                        <SelectItem value="asap">{t("ASAP (1-2 weeks)")}</SelectItem>
+                        <SelectItem value="1-month">{t("1 Month")}</SelectItem>
+                        <SelectItem value="2-3-months">{t("2-3 Months")}</SelectItem>
+                        <SelectItem value="3-6-months">{t("3-6 Months")}</SelectItem>
+                        <SelectItem value="6-plus-months">{t("6+ Months")}</SelectItem>
+                        <SelectItem value="flexible">{t("Flexible")}</SelectItem>
                       </SelectContent>
                     </Select>
-                    {errors.timeline && <p className="text-red-500 text-xs mt-1">{errors.timeline}</p>}
+                    {errors.timeline && <p className="text-center text-red-500 text-xs mt-1">{t(errors.timeline)}</p>}
                   </div>
                 </div>
 
                 {/* Project Description */}
                 <div>
-                  <label htmlFor="description" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                  <label htmlFor="description" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                     <FileText className="w-4 h-4 text-primary" />
-                    <span>Project Description *</span>
+                    <span>{t("Project Description *")}</span>
                   </label>
                   <textarea
                     id="description"
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none ${
+                    className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none ${
                       errors.description ? 'border-red-500' : 'border-border'
                     }`}
                     rows={6}
-                    placeholder="Please describe your project in detail. Include:
+                    placeholder={t(`Please describe your project in detail. Include:
 - What problem you're trying to solve
 - Key features and functionality needed
 - Target audience
 - Any specific requirements or preferences
-- Examples of similar projects you like"
+- Examples of similar projects you like`)}
                   />
-                  {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
+                  {errors.description && <p className="text-center text-red-500 text-xs mt-1">{t(errors.description)}</p>}
                 </div>
 
                 {/* Additional Information */}
                 <div>
-                  <label htmlFor="additionalInfo" className="flex items-center gap-2 text-sm font-semibold mb-2">
+                  <label htmlFor="additionalInfo" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                     <FileText className="w-4 h-4 text-primary" />
-                    <span>Additional Information <span className="text-muted-foreground font-normal">(Optional)</span></span>
+                    <span>{t("Additional Information")} <span className="text-muted-foreground font-normal">({t("Optional")})</span></span>
                   </label>
                   <textarea
                     id="additionalInfo"
                     name="additionalInfo"
                     value={formData.additionalInfo}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-border rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+                    className="w-full px-4 py-3 border-2 border-border rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
                     rows={4}
-                    placeholder="Any other details you'd like to share? (e.g., brand guidelines, preferred technologies, existing systems to integrate with, etc.)"
+                    placeholder={t("Any other details you'd like to share? (e.g., brand guidelines, preferred technologies, existing systems to integrate with, etc.)")}
                   />
                 </div>
               </div>
@@ -524,11 +525,11 @@ Submitted via Project Request Form
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
                       <Loader2 className="w-5 h-5 animate-spin" />
-                      Submitting Request...
+                      {t("Submitting Request...")}
                     </span>
                   ) : (
                     <span className="flex items-center justify-center gap-2">
-                      Submit Project Request
+                      {t("Submit Project Request")}
                       <CheckCircle2 className="w-5 h-5 group-hover/btn:scale-110 transition-transform" />
                     </span>
                   )}
@@ -542,18 +543,18 @@ Submitted via Project Request Form
                   className="border-2 hover:border-primary"
                 >
                   <Link href="/#contact">
-                    Or Send Quick Message
+                    {t("Or Send Quick Message")}
                   </Link>
                 </Button>
               </div>
 
               {/* Privacy Notice */}
               <p className="text-xs text-center text-muted-foreground">
-                By submitting this form, you agree to our{" "}
+                {t("By submitting this form, you agree to our")}{" "}
                 <Link href="/privacy" className="underline hover:text-primary transition-colors">
-                  Privacy Policy
+                  {t("Privacy Policy")}
                 </Link>
-                . Your information will be kept confidential and used solely for project communication.
+                . {t("Your information will be kept confidential and used solely for project communication.")}
               </p>
             </form>
           </Card>
@@ -564,9 +565,9 @@ Submitted via Project Request Form
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <Clock className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-lg font-bold mb-2">Fast Response</h3>
+              <h3 className="text-lg font-bold mb-2">{t("Fast Response")}</h3>
               <p className="text-sm text-muted-foreground">
-                I'll review your request and respond within 12-24 hours with initial feedback and next steps.
+                {t("I'll review your request and respond within 12-24 hours with initial feedback and next steps.")}
               </p>
             </Card>
 
@@ -574,9 +575,9 @@ Submitted via Project Request Form
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
                 <Target className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-lg font-bold mb-2">Tailored Solutions</h3>
+              <h3 className="text-lg font-bold mb-2">{t("Tailored Solutions")}</h3>
               <p className="text-sm text-muted-foreground">
-                Every project is unique. I'll create a custom proposal that fits your specific needs and goals.
+                {t("Every project is unique. I'll create a custom proposal that fits your specific needs and goals.")}
               </p>
             </Card>
 
@@ -584,9 +585,9 @@ Submitted via Project Request Form
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <CheckCircle2 className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-lg font-bold mb-2">Quality Delivery</h3>
+              <h3 className="text-lg font-bold mb-2">{t("Quality Delivery")}</h3>
               <p className="text-sm text-muted-foreground">
-                Committed to delivering high-quality work on time, with regular updates throughout the process.
+                {t("Committed to delivering high-quality work on time, with regular updates throughout the process.")}
               </p>
             </Card>
           </div>
@@ -595,4 +596,3 @@ Submitted via Project Request Form
     </main>
   );
 }
-

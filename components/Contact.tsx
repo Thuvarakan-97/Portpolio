@@ -5,8 +5,10 @@ import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, Mail, User, Phone, MessageSquare, Send, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/lib/language";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -153,16 +155,16 @@ export default function Contact() {
         {/* Section Title */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Get in Touch</span>
+            <span className="gradient-text">{t("Get in Touch")}</span>
           </h2>
           <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></div>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let's work together to bring your ideas to life
+            {t("Have a project in mind? Let's work together to bring your ideas to life")}
           </p>
         </div>
 
         {/* Contact Form Card */}
-        <Card className={`max-w-2xl mx-auto p-8 md:p-10 border-2 hover:border-primary/50 transition-all duration-1000 card-hover ${
+        <Card className={`max-w-2xl mx-auto p-5 sm:p-8 md:p-10 border-2 text-center hover:border-primary/50 transition-all duration-1000 card-hover ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{ transitionDelay: '400ms' }}>
           {/* Gradient Border Top */}
@@ -171,9 +173,9 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
             {/* Name Field */}
             <div className="group">
-              <label htmlFor="name" className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <label htmlFor="name" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                 <User className="w-4 h-4 text-primary" />
-                <span>Name</span>
+                <span>{t("Name")}</span>
               </label>
               <div className="relative">
                 <input
@@ -182,22 +184,22 @@ export default function Contact() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
                     errors.name ? 'border-red-500' : 'border-border'
                   }`}
-                  placeholder="Your Name"
+                  placeholder={t("Your Name")}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                  <p className="text-center text-red-500 text-xs mt-1">{t(errors.name)}</p>
                 )}
               </div>
             </div>
 
             {/* Email Field */}
             <div className="group">
-              <label htmlFor="email" className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <label htmlFor="email" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>Email</span>
+                <span>{t("Email")}</span>
               </label>
               <div className="relative">
                 <input
@@ -206,22 +208,22 @@ export default function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
                     errors.email ? 'border-red-500' : 'border-border'
                   }`}
                   placeholder="your.email@example.com"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  <p className="text-center text-red-500 text-xs mt-1">{t(errors.email)}</p>
                 )}
               </div>
             </div>
 
             {/* Phone Number Field (Optional) */}
             <div className="group">
-              <label htmlFor="phone" className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <label htmlFor="phone" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></span>
+                <span>{t("Phone Number")} <span className="text-muted-foreground font-normal">({t("Optional")})</span></span>
               </label>
               <input
                 id="phone"
@@ -229,16 +231,16 @@ export default function Contact() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-border rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                className="w-full px-4 py-3 border-2 border-border rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
                 placeholder="+1 (555) 123-4567"
               />
             </div>
 
             {/* Message Field */}
             <div className="group">
-              <label htmlFor="message" className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <label htmlFor="message" className="flex items-center justify-center gap-2 text-sm font-semibold mb-2">
                 <MessageSquare className="w-4 h-4 text-primary" />
-                <span>Message</span>
+                <span>{t("Message")}</span>
               </label>
               <div className="relative">
                 <textarea
@@ -246,14 +248,14 @@ export default function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none ${
+                  className={`w-full px-4 py-3 border-2 rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none ${
                     errors.message ? 'border-red-500' : 'border-border'
                   }`}
                   rows={5}
-                  placeholder="Tell me about your project..."
+                  placeholder={t("Tell me about your project...")}
                 />
                 {errors.message && (
-                  <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+                  <p className="text-center text-red-500 text-xs mt-1">{t(errors.message)}</p>
                 )}
               </div>
             </div>
@@ -264,14 +266,14 @@ export default function Contact() {
             {/* Form Status Message */}
             {formStatus && (
               <div
-                className={`flex items-center gap-3 p-4 rounded-xl animate-fade-in ${
+                className={`flex items-center justify-center gap-3 p-4 rounded-xl animate-fade-in ${
                   formStatus.type === "success"
                     ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
                     : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
                 }`}
               >
                 {formStatus.type === "success" && <CheckCircle2 className="w-5 h-5 flex-shrink-0" />}
-                <span className="text-sm font-medium">{formStatus.message}</span>
+                <span className="text-sm font-medium">{t(formStatus.message)}</span>
               </div>
             )}
 
@@ -285,11 +287,11 @@ export default function Contact() {
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Sending...
+                  {t("Sending...")}
                 </span>
               ) : (
                 <span className="flex items-center justify-center">
-                  Send Message
+                  {t("Send Message")}
                   <Send className="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                 </span>
               )}

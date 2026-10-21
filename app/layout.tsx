@@ -4,6 +4,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SiteHeader } from "@/components/site-header";
+import { LanguageProvider } from "@/lib/language";
 // import Footer from '@/components/Footer';
 import Script from "next/script";
 
@@ -32,8 +33,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <LanguageProvider>
+              <SiteHeader />
+              <main className="flex-1">{children}</main>
+            </LanguageProvider>
             
           </div>
         </ThemeProvider>

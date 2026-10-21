@@ -8,6 +8,7 @@ import { socialLinksData } from "@/data/socialLinks";
 import { Download, Mail, Github, Gitlab, Facebook, Twitter, Instagram, Linkedin, Sparkles, ArrowDown} from "lucide-react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/language";
 
 const iconMap = {
   Facebook: Facebook,
@@ -19,6 +20,7 @@ const iconMap = {
 };
 
 export default function Hero() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function Hero() {
           {/* Typing Text */}
           <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <TypingText
-              text="Full Stack Developer specializing in modern web technologies"
+              text={t("Full Stack Developer specializing in modern web technologies")}
               speed={80}
             />
           </div>
@@ -78,19 +80,19 @@ export default function Hero() {
             <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-all duration-300 group bg-gradient-to-r from-primary to-accent">
               <Link href="/project-request">
                 <Sparkles className="mr-2 h-5 w-5 group-hover:rotate-180 transition-transform" />
-                Start a Project
+                {t("Start a Project")}
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="shadow-lg hover:shadow-xl transition-all duration-300 group border-2">
               <Link href="#contact">
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Contact Me
+                {t("Contact Me")}
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild className="shadow-lg hover:shadow-xl transition-all duration-300 group border-2">
               <a href="/thuvarakan.pdf" download>
                 <Download className="mr-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
-                Download CV
+                {t("Download CV")}
               </a>
             </Button>
           </div>
@@ -120,7 +122,7 @@ export default function Hero() {
           {/* Scroll Indicator */}
           <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <Link href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
-              <span className="text-sm font-medium">Scroll to explore</span>
+              <span className="text-sm font-medium">{t("Scroll to explore")}</span>
               <ArrowDown className="h-5 w-5 animate-bounce" />
             </Link>
           </div>

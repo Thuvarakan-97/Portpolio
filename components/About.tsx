@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, ChevronUp, Code2, Palette, Database, Zap } from "lucide-react";
 import { technologyCategories } from "@/data/technologies";
+import { useLanguage } from "@/lib/language";
 
 const categoryIcons: Record<string, any> = {
   languages: Code2,
@@ -15,6 +16,7 @@ const categoryIcons: Record<string, any> = {
 };
 
 export default function About() {
+  const { t } = useLanguage();
   const [openCategory, setOpenCategory] = useState<string | null>("languages");
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -57,16 +59,16 @@ export default function About() {
         {/* Section Title with Gradient Underline */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">About Me</span>
+            <span className="gradient-text">{t("About Me")}</span>
           </h2>
           <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></div>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Passionate about creating exceptional digital experiences
+            {t("Passionate about creating exceptional digital experiences")}
           </p>
         </div>
-        <div className={`grid gap-8 lg:grid-cols-2 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mx-auto grid max-w-6xl grid-cols-1 justify-items-center gap-8 lg:grid-cols-2 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Professional Summary Card */}
-          <Card className="group relative p-8 bg-gradient-to-br from-card via-card to-card/50 border-2 hover:border-primary/50 transition-all duration-500 overflow-hidden card-hover">
+          <Card className="group relative w-full p-5 sm:p-8 bg-gradient-to-br from-card via-card to-card/50 border-2 text-center hover:border-primary/50 transition-all duration-500 overflow-hidden card-hover">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
             
@@ -85,11 +87,11 @@ export default function About() {
             </div>
             
             <h3 className="relative z-10 text-2xl font-bold mb-4 text-center">
-              <span className="gradient-text">Professional Summary</span>
+              <span className="gradient-text">{t("Professional Summary")}</span>
             </h3>
             
-            <p className="relative z-10 text-muted-foreground leading-relaxed text-justify">
-              I am a skilled Full Stack Developer with extensive experience in designing and deploying scalable web applications using advanced technologies such as Next.js, React, Laravel, and Node.js. My proficiency in both front-end and back-end development allows me to deliver seamless user experiences and efficient server-side solutions. With a Bachelor's degree in Information Technology and a strong commitment to excellence, I consistently address complex technical challenges while prioritizing performance and user satisfaction. I also contribute to the tech community by sharing expertise through my Medium blog, covering topics like Next.js 15 integration with Laravel 12, React vs. Next.js comparisons, and mobile development workflows with Expo CLI and React Native CLI. I am dedicated to driving innovation and delivering impactful solutions in software development.
+            <p className="relative z-10 text-center text-muted-foreground leading-relaxed">
+              {t("I am a Full Stack Developer and M.Sc. Digital Health student at Deggendorf Institute of Technology, focused on medical informatics and the development of digital healthcare solutions. My experience building scalable web applications with Next.js, React, Laravel, and Node.js gives me a strong foundation for healthcare software, health information systems, and data-driven tools. I am particularly interested in connecting technology, clinical workflows, and healthcare data to improve efficiency, accessibility, and patient-centered care. I bring a background in Information Technology, practical software engineering experience, and a commitment to secure, usable, and impactful digital health innovation.")}
             </p>
 
             {/* Decorative Corner */}
@@ -97,12 +99,12 @@ export default function About() {
           </Card>
 
           {/* Skills & Technologies Card */}
-          <Card className="group relative p-8 bg-gradient-to-br from-card via-card to-card/50 border-2 hover:border-primary/50 transition-all duration-500 overflow-hidden card-hover">
+          <Card className="group relative w-full p-5 sm:p-8 bg-gradient-to-br from-card via-card to-card/50 border-2 text-center hover:border-primary/50 transition-all duration-500 overflow-hidden card-hover">
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-primary to-accent"></div>
             
             <h3 className="relative z-10 text-2xl font-bold mb-6 text-center">
-              <span className="gradient-text">Skills & Technologies</span>
+              <span className="gradient-text">{t("Skills & Technologies")}</span>
             </h3>
             
             <div className="relative z-10 space-y-3">
@@ -117,23 +119,23 @@ export default function About() {
                     {/* Category Header */}
                     <button
                       onClick={() => toggleCategory(category)}
-                      className="w-full flex justify-between items-center px-5 py-3 bg-gradient-to-r from-muted/50 to-transparent hover:from-primary/10 transition-all duration-300 group/btn"
+                      className="w-full flex justify-center items-center gap-3 px-5 py-3 bg-gradient-to-r from-muted/50 to-transparent hover:from-primary/10 transition-all duration-300 group/btn"
                     >
                       <div className="flex items-center gap-3">
                         <div className="p-2 rounded-lg bg-primary/10 group-hover/btn:bg-primary/20 transition-colors">
                           <Icon className="w-4 h-4 text-primary" />
                         </div>
                         <span className="text-base font-semibold">
-                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                          {t(category.charAt(0).toUpperCase() + category.slice(1))}
                         </span>
                       </div>
-                      <div className="p-1.5 rounded-full bg-primary/10 group-hover/btn:bg-primary/20 transition-colors">
+                      <span className="p-1.5 rounded-full bg-primary/10 group-hover/btn:bg-primary/20 transition-colors">
                         {openCategory === category ? (
                           <ChevronUp className="w-4 h-4 text-primary" />
                         ) : (
                           <ChevronDown className="w-4 h-4 text-primary" />
                         )}
-                      </div>
+                      </span>
                     </button>
                     
                     {/* Category Content */}

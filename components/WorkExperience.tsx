@@ -3,10 +3,12 @@
 
 import { Card } from "@/components/ui/card";
 import experiences from "@/data/experiences";
-import { Briefcase, MapPin, CalendarDays, CheckCircle, Sparkles } from "lucide-react";
+import { Briefcase, MapPin, CalendarDays, CheckCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { useLanguage } from "@/lib/language";
 
 export default function WorkExperience() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,49 +46,30 @@ export default function WorkExperience() {
         {/* Section Title */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Work Experience</span>
+            <span className="gradient-text">{t("Work Experience")}</span>
           </h2>
           <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></div>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            My professional journey and career milestones
+            {t("My professional journey and career milestones")}
           </p>
         </div>
 
         {/* Timeline */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary transform md:-translate-x-1/2"></div>
-
+        <div className="relative max-w-3xl mx-auto">
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div
                 key={index}
                 className={`relative transition-all duration-1000 ${
-                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ transitionDelay: `${index * 200 + 400}ms` }}
                 onMouseEnter={() => setActiveIndex(index)}
                 onMouseLeave={() => setActiveIndex(null)}
               >
-                {/* Timeline Node */}
-                <div className={`absolute left-0 md:left-1/2 top-8 w-6 h-6 transform md:-translate-x-1/2 z-10 transition-all duration-300 ${
-                  activeIndex === index ? 'scale-150' : 'scale-100'
-                }`}>
-                  <div className="relative w-full h-full">
-                    <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
-                    <div className="relative w-full h-full bg-gradient-to-br from-primary to-accent rounded-full border-4 border-background shadow-lg flex items-center justify-center">
-                      {activeIndex === index && (
-                        <Sparkles className="w-3 h-3 text-primary-foreground" />
-                      )}
-                    </div>
-                  </div>
-                </div>
-
                 {/* Content Card */}
-                <div className={`ml-12 md:ml-0 md:w-[calc(50%-3rem)] ${
-                  index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'
-                }`}>
-                  <Card className={`group p-6 border-2 hover:border-primary/50 transition-all duration-500 card-hover ${
+                <div className="mx-auto w-full">
+                  <Card className={`group p-6 border-2 text-center hover:border-primary/50 transition-all duration-500 card-hover ${
                     activeIndex === index ? 'border-primary/50 shadow-2xl' : ''
                   }`}>
                     {/* Gradient Border Top */}
@@ -97,39 +80,39 @@ export default function WorkExperience() {
 
                     {/* Header */}
                     <div className="relative z-10">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                      <div className="flex flex-col items-center gap-2 mb-3">
                         <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
-                          {exp.title}
+                          {t(exp.title)}
                         </h3>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
+                        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
                           <Briefcase className="w-4 h-4" />
                           <span className="font-medium">{exp.company}</span>
                         </div>
                       </div>
 
                       {/* Meta Information */}
-                      <div className="flex flex-wrap gap-4 mb-4">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div className="flex flex-wrap justify-center gap-4 mb-4">
+                        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                           <MapPin className="w-4 h-4 text-primary" />
-                          <span>{exp.location}</span>
+                          <span>{t(exp.location)}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                           <CalendarDays className="w-4 h-4 text-accent" />
-                          <span>{exp.period}</span>
+                          <span>{t(exp.period)}</span>
                         </div>
                       </div>
 
                       {/* Description */}
                       <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                        {exp.description}
+                        {t(exp.description)}
                       </p>
 
                       {/* Tech Stack */}
                       <div className="mb-4">
-                        <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                          <span className="gradient-text">Tech Stack</span>
+                        <h4 className="text-sm font-semibold mb-2 flex items-center justify-center gap-2">
+                          <span className="gradient-text">{t("Tech Stack")}</span>
                         </h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap justify-center gap-2">
                           {exp.technologies.map((tech, techIndex) => (
                             <span
                               key={tech}
@@ -144,17 +127,17 @@ export default function WorkExperience() {
 
                       {/* Key Achievements */}
                       <div>
-                        <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                          <span className="gradient-text">Key Achievements</span>
+                        <h4 className="text-sm font-semibold mb-2 flex items-center justify-center gap-2">
+                          <span className="gradient-text">{t("Key Achievements")}</span>
                         </h4>
                         <ul className="space-y-2">
                           {exp.keyAchievements.map((item, i) => (
                             <li
                               key={i}
-                              className="flex items-start gap-2 text-sm text-foreground/80 group/achievement"
+                              className="flex flex-col items-center gap-1 text-center text-sm text-foreground/80 group/achievement"
                             >
                               <CheckCircle className="w-4 h-4 mt-0.5 text-primary flex-shrink-0 group-hover/achievement:scale-110 transition-transform" />
-                              <span>{item}</span>
+                              <span>{t(item)}</span>
                             </li>
                           ))}
                         </ul>
