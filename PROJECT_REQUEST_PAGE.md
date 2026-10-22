@@ -165,7 +165,7 @@ NEW PROJECT REQUEST
 CLIENT INFORMATION:
 - Name: John Doe
 - Email: john@example.com
-- Phone: +1 (555) 123-4567
+- Phone: +49 (123) 456-7890
 - Company: Acme Corp
 - Website: https://acme.com
 

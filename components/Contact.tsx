@@ -232,7 +232,7 @@ export default function Contact() {
                 value={formData.phone}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border-2 border-border rounded-xl bg-background/50 text-center focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                placeholder="+1 (555) 123-4567"
+                placeholder="+49 (123) 456-7890"
               />
             </div>
 
